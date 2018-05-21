@@ -37,72 +37,96 @@ def passwordGenerator():
 
 
 #MAIN
+runAgain=True
+
 file = open("privatekey.txt", "r") 
 for enteredValue in file: 
     enteredValue = enteredValue.strip()
     enteredValue = enteredValue.strip("\n")
     enteredValue = enteredValue.strip("'")
     privateKey= enteredValue
-
+    
 enteredPass= getpass.getpass("\nEnter the private key: ")
 
-if enteredPass == privateKey:
-    again=True
-    while again==True:
-        print "\n1. Generate a New Password"
-        print "2. View an Old Password"
-        print "3. Enter pre-existing password"
-        choice= raw_input("\nWhich one (1,2,3): ")
-        
-        if choice=="1":
-            passwordGenerator()
-            break
-        
-        elif choice=="2":
-            whichOne=raw_input("What site was your password from? (e.g. facebook)  ")
-            myPasswords=[]
+while runAgain==True:    
+    if enteredPass == privateKey:
+        again=True
+        while again==True:
+            print "\n1. Generate a New Password"
+            print "2. View an Old Password"
+            print "3. Enter pre-existing password"
+            choice= raw_input("\nWhich one (1,2,3): ")
             
-            file = open("mypasswords.txt", "r") 
-            for enteredValue in file: 
-                enteredValue = enteredValue.strip()
-                enteredValue = enteredValue.strip("\n")
-                enteredValue = enteredValue.strip("'")
-                myPasswords.append(enteredValue)
-                
-                if whichOne in enteredValue:
-                    print "\n%s" %(enteredValue)
-                    value = True
-                    break
+            if choice=="1":
+                passwordGenerator()
+                sleep(2)
+                anotherOne=raw_input("\nPress q to quit or any key to perform another task.")
+                if anotherOne=="q":
+                    runAgain=False
                 else:
-                    value = False
+                    runAgain=True                
+                break
             
-                       
-            if value==False:
-                print "\nSorry, couldn't find that password."
-                print "Here are all your saved passwords:"
-                print "\n"
+            elif choice=="2":
+                whichOne=raw_input("What site was your password from? (e.g. facebook)  ")
+                myPasswords=[]
+                
+                file = open("mypasswords.txt", "r") 
+                for enteredValue in file: 
+                    enteredValue = enteredValue.strip()
+                    enteredValue = enteredValue.strip("\n")
+                    enteredValue = enteredValue.strip("'")
+                    myPasswords.append(enteredValue)
+                    
+                    if whichOne in enteredValue:
+                        print "\n%s" %(enteredValue)
+                        value = True
+                        break
+                    else:
+                        value = False
+                
+                           
+                if value==False:
+                    print "\nSorry, couldn't find that password."
+                    print "Here are all your saved passwords:"
+                    print "\n"
+                
+                    del myPasswords[0]
+                    del myPasswords[0]
+                    del myPasswords[0]
+                    length=len(myPasswords)
+                
+                    for x in range(0,length):
+                        print myPasswords[x]               
+                
+                sleep(2)
+                anotherOne=raw_input("\nPress q to quit or any key to perform another task.")
+                if anotherOne=="q":
+                    runAgain=False
+                else:
+                    runAgain=True
+                break
+          
             
-                del myPasswords[0]
-                del myPasswords[0]
-                del myPasswords[0]
-                length=len(myPasswords)
-            
-                for x in range(0,length):
-                    print myPasswords[x]               
-            break
-      
-        
-        elif choice=="3":
-            typePassword=raw_input("\nWhat site would you like to make a password for? (e.g. instagram)  ")
-            password=raw_input("Enter the password: ")
-            sleep(2)
-            print "\nThe password has been saved to \"mypasswords.txt\"."
-            savePasswords(typePassword,password)
-            break
-        else:  
-            print "Sorry, I didn't understand that command."
-            sleep(2)
-            print "Try again by entering a 1 or a 2."
-            sleep(2)    
-else:
-    print "\nIncorrect Password."
+            elif choice=="3":
+                typePassword=raw_input("\nWhat site would you like to make a password for? (e.g. instagram)  ")
+                password=raw_input("Enter the password: ")
+                sleep(2)
+                print "\nThe password has been saved to \"mypasswords.txt\"."
+                savePasswords(typePassword,password)
+                
+                sleep(2)
+                anotherOne=raw_input("\nPress q to quit or any key to perform another task.")
+                if anotherOne=="q":
+                    runAgain=False
+                else:
+                    runAgain=True
+                break
+            else:  
+                print "Sorry, I didn't understand that command."
+                sleep(2)
+                print "Try again by entering a 1 or a 2."
+                sleep(2)   
+    else:
+        print "\nIncorrect Password."
+        break
