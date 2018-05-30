@@ -30,7 +30,7 @@ def passwordGenerator():
 
     password = ''.join(str(n) for n in passwordList)
     
-    typePassword=input("\nWhat site would you like to make a password for? (e.g. instagram)  ")
+    typePassword=raw_input("\nWhat site would you like to make a password for? (e.g. instagram)  ")
     print "%s is your new password for %s." %(password,typePassword)
     sleep(3)
     print "\nThe password has been saved to \"mypasswords.txt\"."
