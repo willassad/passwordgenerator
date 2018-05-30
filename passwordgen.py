@@ -44,7 +44,8 @@ runAgain=True
 
 file = open("user.txt", "r") 
 first=file.read(1)
-if not first:
+second=file.read(2)
+if not first or not second:
     username= ""
 
 
@@ -68,8 +69,9 @@ if username=="":
 
 file = open("privatekey.txt", "r")
 
-second=file.read(1)
-if not second:
+first=file.read(1)
+second=file.read(2)
+if not first or not second:
     key=""
 
 for enteredValue in file: 
