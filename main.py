@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+#RUN IN PYTHON 3 OR 2
 
 from string import ascii_uppercase as upp
 from string import ascii_lowercase as low
@@ -16,6 +17,12 @@ def pass_input(message=""):
     return plain
 
 choice = SystemRandom().choice
+
+try:
+    _test = raw_input
+except NameError:
+    def raw_input(message=""):
+        return input(message)
 
 class PasswordGenerator():
     def __init__(self, security=2):
