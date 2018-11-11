@@ -1,4 +1,4 @@
-# passwordgenerator
+# Password Generator
 Generate secure passwords and save them to a file.
 You will need to download this repository to a folder on your computer.
 
